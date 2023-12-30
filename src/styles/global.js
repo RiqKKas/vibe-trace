@@ -18,7 +18,7 @@ export const GlobalStyle = createGlobalStyle`
 	}
 
   ::selection {
-    background-color: ${props => props.theme['blue-500']};
+    background-color: ${props => props.theme['red-300']};
     color: ${props => props.theme['white']};
   }
 

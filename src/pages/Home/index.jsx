@@ -6,6 +6,7 @@ export const Home = () => {
 		<>
 			<ContentContainer>
 				<HomeContainer id="homeContainer">
+					<div id="container"></div>
 				</HomeContainer>
 			</ContentContainer>
 		</>
