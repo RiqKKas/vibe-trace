@@ -28,11 +28,10 @@ export function inputFile() {
 }
 
 function generateKMeans(vector, headers) {
-  const margin = { top: 80, right: 80, bottom: 50, left: 80 };
+  const margin = { top: 80, right: 80, bottom: 60, left: 80 };
   const viewBox = { x: 0, y: 0, w: 1000, h: 600 };
   const width = viewBox.w - margin.left - margin.right;
   const height = viewBox.h - margin.top - margin.bottom;
-  let textConst = 1;
   const container = d3.select('#container');
 
   const combinations = getCombinations(headers);
@@ -115,8 +114,11 @@ function generateKMeans(vector, headers) {
     };
 
     const updateCentroids = () => {
+      const pointCounts = new Array(centroids.length).fill(0);
+
       centroids.forEach((centroid, i) => {
         const cluster = points.filter(point => point.cluster === i);
+        pointCounts[i] = cluster.length;
         if (cluster.length > 0) {
           centroid.x = avg(cluster.map(point => point.x));
           centroid.y = avg(cluster.map(point => point.y));
@@ -127,17 +129,45 @@ function generateKMeans(vector, headers) {
         .attr('cx', d => x(d.x))
         .attr('cy', d => y(d.y));
 
-      const yValues = Math.max(centroids[0].y, centroids[1].y);
-      const xValues = Math.max(centroids[0].x, centroids[1].x);
-      const isHigher = yValues > xValues;
+      const group1 = centroids[0].y > centroids[0].x;
+      const group2 = centroids[1].y > centroids[1].x;
 
-      const conclusionLabel = svg.select('.conclusion-label');
-      conclusionLabel.transition()
+
+
+      let groupsStr1 = '';
+      if (group1) {
+        const groupMusical = combination[0].split('_');
+        groupsStr1 += `No grupo LARANJA o ${groupMusical[2].toUpperCase()} é o mais ouvido com ${pointCounts[0]} ouvintes!`;
+      } else {
+        const groupMusical = combination[1].split('_');
+        groupsStr1 += `No grupo LARANJA o ${groupMusical[2].toUpperCase()} é o mais ouvido com ${pointCounts[1]} ouvintes!`;
+      }
+
+      let groupsStr2 = '';
+      if (group2) {
+        const groupMusical = combination[0].split('_');
+        groupsStr2 += `No grupo VERDE o ${groupMusical[2].toUpperCase()} é o mais ouvido com ${pointCounts[0]} ouvintes!`;
+      } else {
+        const groupMusical = combination[1].split('_');
+        groupsStr2 += `No grupo VERD o ${groupMusical[2].toUpperCase()} é o mais ouvido com ${pointCounts[1]} ouvintes!`;
+      }
+
+      const conclusionLabel1 = svg.select('.conclusion-label-1');
+      conclusionLabel1.transition()
         .duration(500)
         .attr('x', width / 2)
         .attr('y', height + margin.bottom - 10)
         .attr('text-anchor', 'middle')
-        .text(isHigher ? `${combination[0]} is higher` : `${combination[1]} is higher`)
+        .text(groupsStr1)
+        .style('font-size', '16px');
+
+      const conclusionLabel2 = svg.select('.conclusion-label-2');
+      conclusionLabel2.transition()
+        .duration(500)
+        .attr('x', width / 2)
+        .attr('y', height + margin.bottom + 10)
+        .attr('text-anchor', 'middle')
+        .text(groupsStr2)
         .style('font-size', '16px');
     };
 
@@ -157,14 +187,20 @@ function generateKMeans(vector, headers) {
 
 
     svg.append('text')
-      .attr('class', 'conclusion-label')
+      .attr('class', 'conclusion-label-1')
       .attr('x', width / 2)
       .attr('y', height + margin.bottom - 10)
       .attr('text-anchor', 'middle')
-      .text('Esse é o texto número : ' + textConst)
-      .style('font-size', '16px');
+      .text();
 
-    textConst++;
+    svg.append('text')
+      .attr('class', 'conclusion-label-2')
+      .attr('x', width / 2)
+      .attr('y', height + margin.bottom - 10)
+      .attr('text-anchor', 'middle')
+      .text();
+
+
   });
 
 }
