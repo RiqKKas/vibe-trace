@@ -28,8 +28,8 @@ export function inputFile() {
 }
 
 function generateKMeans(vector, headers) {
-  const margin = { top: 80, right: 80, bottom: 60, left: 80 };
-  const viewBox = { x: 0, y: 0, w: 1000, h: 600 };
+  const margin = { top: 130, right: 80, bottom: 60, left: 80 };
+  const viewBox = { x: 0, y: 35, w: 1000, h: 800 };
   const width = viewBox.w - margin.left - margin.right;
   const height = viewBox.h - margin.top - margin.bottom;
   const container = d3.select('#container');
@@ -51,9 +51,10 @@ function generateKMeans(vector, headers) {
     svg.append('text')
       .attr('x', width / 2)
       .attr('y', -margin.top / 2)
-      .attr('text-anchor', 'middle')
-      .text(`Table ${index + 1}: ${combination[0]} & ${combination[1]}`)
-      .style('font-size', '16px');
+        .attr('text-anchor', 'middle')
+        .text(`Table ${index + 1}: ${combination[0]} & ${combination[1]}`)
+        .style('font-size', '16px')
+      ;
 
     const x = d3.scaleLinear()
       .domain([0, 50])
@@ -132,8 +133,6 @@ function generateKMeans(vector, headers) {
       const group1 = centroids[0].y > centroids[0].x;
       const group2 = centroids[1].y > centroids[1].x;
 
-
-
       let groupsStr1 = '';
       if (group1) {
         const groupMusical = combination[0].split('_');
@@ -149,7 +148,7 @@ function generateKMeans(vector, headers) {
         groupsStr2 += `No grupo VERDE o ${groupMusical[2].toUpperCase()} é o mais ouvido com ${pointCounts[0]} ouvintes!`;
       } else {
         const groupMusical = combination[1].split('_');
-        groupsStr2 += `No grupo VERD o ${groupMusical[2].toUpperCase()} é o mais ouvido com ${pointCounts[1]} ouvintes!`;
+        groupsStr2 += `No grupo VERDE o ${groupMusical[2].toUpperCase()} é o mais ouvido com ${pointCounts[1]} ouvintes!`;
       }
 
       const conclusionLabel1 = svg.select('.conclusion-label-1');
@@ -199,8 +198,6 @@ function generateKMeans(vector, headers) {
       .attr('y', height + margin.bottom - 10)
       .attr('text-anchor', 'middle')
       .text();
-
-
   });
 
 }
