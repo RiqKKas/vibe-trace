@@ -7,7 +7,7 @@ export const HomeContainer = styled.main`
   flex-direction: column;
   align-items: center;
   /* justify-content: center; */
-  gap: 4rem;
+  gap: 2rem;
   position: relative;
   z-index: 6;
 
@@ -64,7 +64,7 @@ export const Team = styled.div`
     h2 {
       max-width: 12rem;
       font-size: 1.5rem;
-      color: ${(props) => props.theme['green-300']};
+      color: ${(props) => props.theme['black-f']};
     }
 
     .stats {
@@ -123,26 +123,8 @@ export const FilterContainer = styled.section`
     flex-direction: column;
     justify-content: space-evenly;
 
-    select {
-      cursor: pointer;
-      outline: 0;
-      border: 0;
-      padding: 0 0.5rem 0 0;
-      background-color: ${(props) => props.theme['gray-100']};
-      color: ${(props) => props.theme['blue-700']};
-      font-size: clamp(1vw, 1rem, 5.5vw);
-      font-weight: 600;
-      font-family: inherit;
-
-      option {
-        background-color: ${(props) => props.theme['gray-100']};
-        font-family: inherit;
-        font-weight: inherit;
-      }
-    }
-
-    select::-ms-expand {
-      display: none;
+    h1 {
+      color: ${(props) => props.theme['black-f']};
     }
   }
 

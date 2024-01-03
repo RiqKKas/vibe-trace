@@ -9,17 +9,18 @@ export const Home = () => {
 
 	setInterval(() => {
 		setRanking(fillRanking());
-	}, 1000);
+	}, 100);
 
 	const fillRanking = () => {
 		let ranking = getRanking();
 		let num = 0;
+
 		ranking = ranking.map(({name, listeners, hours}) => {
 			++num;
 			return (
 				<Team key={nanoid()}>
 					<div className="information">
-						<h2>Top {num} - {name}</h2>
+						<h2>Top {num} - {name.toUpperCase()}</h2>
 
 						<div className="stats">
 							<ul>
@@ -53,7 +54,7 @@ export const Home = () => {
 							</div>
 
 							<div className="container-league-logo">
-								<img src="images/music.png" alt="Logo da liga" />
+								<img src="images/game.png" alt="Logo da liga" />
 							</div>
 						</FilterContainer>
   
@@ -71,13 +72,18 @@ export const Home = () => {
 							</div>
 
 							<div className="container-league-logo">
-								<img src="images/music.png" alt="Logo da liga" />
+								<img src="images/pngwing.png" alt="Logo da liga" />
 							</div>
 						</FilterContainer>
   
 						<div id="container"></div>
 					</TeamsContainer>
 				</HomeContainer>
+
+				<div id="subTitle">
+					<h1 id="subTitleN2">Por Favor, Informe os Dados Para a Análise em um Arquivo .csv</h1>
+				</div>
+
 			</ContentContainer>
 		</>
 	);

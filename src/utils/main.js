@@ -22,6 +22,9 @@ export function inputFile() {
 
       ranking = calculateListenerAndListenHours(headers, vector);
       generateKMeans(vector, headers);
+
+      document.getElementById('homeContainer').style.display = 'flex';
+      document.getElementById('subTitleN2').style.display = 'none';
     };
 
     reader.readAsText(selectedFile);
@@ -66,8 +69,6 @@ function calculateListenerAndListenHours(headers, vectors) {
     else return true;
   });
 
-
-  // console.log(ranking);
   return ranking;
 }
 

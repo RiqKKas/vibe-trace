@@ -35,4 +35,8 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${props => props.theme['blue-700']};
   }
 
+  #homeContainer {
+    display: none;
+  }
+
 `;
