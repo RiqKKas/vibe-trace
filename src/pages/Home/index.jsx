@@ -1,57 +1,43 @@
-import { HomeContainer, TeamsContainer, Team } from './styles';
+import { HomeContainer, TeamsContainer, Team, FilterContainer, ContainerHeader } from './styles';
 import { ContentContainer } from '../components/ContentContainer';
-import { Link } from 'react-router-dom';
+import { getRanking } from '../../utils/main';
 import { nanoid } from 'nanoid';
+import { useState } from 'react';
 
 export const Home = () => {
+	const [ranking, setRanking] = useState([]);
+
+	setInterval(() => {
+		setRanking(fillRanking());
+	}, 1000);
 
 	const fillRanking = () => {
-    // const raking =
-
+		let ranking = getRanking();
+		let num = 0;
+		ranking = ranking.map(({name, listeners, hours}) => {
+			++num;
 			return (
 				<Team key={nanoid()}>
 					<div className="information">
-						<h2>{Nome}</h2>
+						<h2>Top {num} - {name}</h2>
 
 						<div className="stats">
 							<ul>
-								<li>Vitórias: <span>{V}</span></li>
-								<li>Empates: <span>{E}</span></li>
-								<li>Derrotas: <span>{J - V - E}</span></li>
-								<li>Total de Gols: <span>{GP}</span></li>
-							</ul>
-
-							<ul className="cards">
-								<li className="card">
-									<img
-										src={`${imagesPath}/yellow-card.svg`}
-										alt="Cartão amarelo"
-									/>
-									<span> {CA}</span>
-								</li>
-								<li className="card">
-									<img
-										src={`${imagesPath}/red-card.svg`}
-										alt="Cartão vermelho"
-									/>
-									<span> {CV}</span>
-								</li>
+								<li>Ouvintes: <span>{listeners}</span></li>
+								<li>Horas Ouvidas: <span>{hours}</span></li>
 							</ul>
 						</div>
 					</div>
 
 					<div className="cast">
 						<img
-							src={Escudo || 'https://w7.pngwing.com/pngs/542/936/png-transparent-white-line-black-m-line.png'} alt={`Logo do ${Nome}`} />
-						<Link to={`/times/${id}/${Nome.replace(' ', '_')}/jogadores`}>
-							<p>Ver Elenco</p>
-						</Link>
+							src={'images/music.png'} alt={`Logo do ${name}`} />
 					</div>
 				</Team>
 			);
 		});
 
-		return classificationData;
+		return ranking;
 	};
 
 	return (
@@ -59,12 +45,38 @@ export const Home = () => {
 			<ContentContainer>
 				<HomeContainer id="homeContainer">
 					<TeamsContainer>
+						<FilterContainer>
+							<div className="container-context">
+								<ContainerHeader>
+									<h1>Ranking de Gêneros Musicais</h1>
+								</ContainerHeader>
+							</div>
+
+							<div className="container-league-logo">
+								<img src="images/music.png" alt="Logo da liga" />
+							</div>
+						</FilterContainer>
+  
 						<section className="teams-presentation">
-							{fillRanking()}
+							{ranking}
 						</section>
 					</TeamsContainer>
 
-					<div id="container"></div>
+					<TeamsContainer>
+						<FilterContainer>
+							<div className="container-context">
+								<ContainerHeader>
+									<h1>Análise de Dados</h1>
+								</ContainerHeader>
+							</div>
+
+							<div className="container-league-logo">
+								<img src="images/music.png" alt="Logo da liga" />
+							</div>
+						</FilterContainer>
+  
+						<div id="container"></div>
+					</TeamsContainer>
 				</HomeContainer>
 			</ContentContainer>
 		</>
