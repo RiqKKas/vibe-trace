@@ -8,7 +8,7 @@ export const Header = () => {
 		<HeaderContainer>
 			<HeaderLimiter>
 				<h2 title='Voltar ao início'>
-					<Link to='/home'>
+					<Link to='/'>
             VibeTracer
 					</Link>
 				</h2>
