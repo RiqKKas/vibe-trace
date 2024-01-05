@@ -181,19 +181,19 @@ function generateKMeans(vector, headers) {
       let groupsStr1 = '';
       if (group1) {
         const groupMusical = combination[0].split('_');
-        groupsStr1 += `No grupo LARANJA o ${groupMusical[2].toUpperCase()} é o mais ouvido com ${pointCounts[0]} ouvintes!`;
+        groupsStr1 += `No grupo LARANJA o ${groupMusical[2].toUpperCase()} é o mais ouvido com ${pointCounts[0]} ouvintes e média (centroid) de ${centroids[0].y.toFixed(2)} horas ouvidas!`;
       } else {
         const groupMusical = combination[1].split('_');
-        groupsStr1 += `No grupo LARANJA o ${groupMusical[2].toUpperCase()} é o mais ouvido com ${pointCounts[1]} ouvintes!`;
+        groupsStr1 += `No grupo LARANJA o ${groupMusical[2].toUpperCase()} é o mais ouvido com ${pointCounts[1]} ouvintes e média (centroid) de ${centroids[0].x.toFixed(2)} horas ouvidas!`;
       }
 
       let groupsStr2 = '';
       if (group2) {
         const groupMusical = combination[0].split('_');
-        groupsStr2 += `No grupo VERDE o ${groupMusical[2].toUpperCase()} é o mais ouvido com ${pointCounts[0]} ouvintes!`;
+        groupsStr2 += `No grupo VERDE o ${groupMusical[2].toUpperCase()} é o mais ouvido com ${pointCounts[0]} ouvintese e média (centroid) de ${centroids[1].y.toFixed(2)} horas ouvidas!`;
       } else {
         const groupMusical = combination[1].split('_');
-        groupsStr2 += `No grupo VERDE o ${groupMusical[2].toUpperCase()} é o mais ouvido com ${pointCounts[1]} ouvintes!`;
+        groupsStr2 += `No grupo VERDE o ${groupMusical[2].toUpperCase()} é o mais ouvido com ${pointCounts[1]} ouvintes e e média (centroid) de ${centroids[1].x.toFixed(2)} horas ouvidas!`;
       }
 
       const conclusionLabel1 = svg.select('.conclusion-label-1');
